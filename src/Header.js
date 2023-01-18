@@ -1,4 +1,6 @@
+import { useState } from "react";
 const Header = () => {
+  const [isLogged, setLogged] = useState(false);
   return (
     <div className="header">
       <div className="header__left">
@@ -11,6 +13,14 @@ const Header = () => {
           <li>Cart</li>
           <li>help</li>
         </ul>
+      </div>
+      <div className="auth">
+        {console.log(isLogged)}
+        {isLogged ? (
+          <button onClick={() => setLogged(false)}>Logout</button>
+        ) : (
+          <button onClick={() => setLogged(true)}>Login</button>
+        )}
       </div>
     </div>
   );

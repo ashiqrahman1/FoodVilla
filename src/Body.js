@@ -1,6 +1,7 @@
 import { restaurantlist } from "./Config";
 import HotelCard from "./HotelCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
 
 function filterData(searchInput, restaurants) {
   const filterdata = restaurants.filter((restro) =>
@@ -9,8 +10,23 @@ function filterData(searchInput, restaurants) {
   return filterdata;
 }
 const Body = () => {
-  const [restaurants, setRestaurant] = useState(restaurantlist);
+  const [restaurants, setRestaurant] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [allRestro, setAllrestro] = useState([]);
+  useEffect(() => {
+    Getdata();
+  }, []);
+
+  async function Getdata() {
+    const api_data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=10.6345647&lng=76.1203982&page_type=DESKTOP_WEB_LISTING"
+    );
+    const json = await api_data.json();
+    console.log(json);
+    setAllrestro(json?.data?.cards[2]?.data?.data?.cards);
+    setRestaurant(json?.data?.cards[2]?.data?.data?.cards);
+  }
+
   return (
     <div className="body__outline py-3">
       <div className="container">
@@ -22,13 +38,12 @@ const Body = () => {
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
             />
-            {console.log(searchInput)}
             <div className="searchbar__icon">
               <button
                 onClick={() => {
                   // need to update
                   // filter Data
-                  const restaurantInfo = filterData(searchInput, restaurants);
+                  const restaurantInfo = filterData(searchInput, allRestro);
                   setRestaurant(restaurantInfo);
                 }}
               >
@@ -37,11 +52,15 @@ const Body = () => {
             </div>
           </div>
         </div>
-        <div className="items py-3">
-          {restaurants.map((hotel) => {
-            return <HotelCard key={hotel.data.id} {...hotel.data} />;
-          })}
-        </div>
+        {restaurants.length === 0 ? (
+          <Shimmer />
+        ) : (
+          <div className="items py-3">
+            {restaurants.map((hotel) => {
+              return <HotelCard key={hotel.data.id} {...hotel.data} />;
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
