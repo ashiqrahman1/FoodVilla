@@ -7,7 +7,14 @@ body {
     font-family: 'Raleway', sans-serif;
     /* background: #E9E9EB; */
 }
+a {
+    text-decoration: none;
+    color: inherit;
+}
 
+ul {
+    list-style: none;
+}
 .container {
     max-width: 1290px;
     margin: auto;
@@ -33,11 +40,9 @@ body {
     border-bottom: 1px solid rgb(165, 163, 163);
     padding: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 7px;
-}
+} 
 
-.header__left {
-    /* margin-left: 19rem; */
-}
+
 .header__right > ul {
     list-style: none;
     /* margin-right: 18rem; */
@@ -69,6 +74,10 @@ body {
     display: flex;
     flex-direction: column;
 
+}
+
+.text_center {
+    text-align: center;
 }
 .card__info > img {
     width: 100%;
@@ -121,4 +130,79 @@ body {
     padding: 0.5rem;
     margin: 0 0.4rem;
     
+}
+
+.shimmer_ui {
+        border: 1px solid lightsteelblue;
+        width: 300px;
+        height: 340px;
+        padding: 0.5rem 1rem;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        transition: all 1s ease-in-out;
+}
+
+.shimmer_head {
+    padding: 5rem 1rem;
+    background: lightgray;
+    /* height: 30px; */
+    margin: 1rem 0;
+}
+
+.shimmer_text {
+    width: 10rem;
+    height: 20px;
+    background: lightgrey;
+    margin: 10px 0;
+}
+
+.shimmer_small_text {
+    width: 5rem;
+    height: 10px;
+    background: lightgray;
+}
+
+.error {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+}
+
+.menu_background {
+    background: #171A29;
+    /* height: 30vh; */
+    top: 0;
+    /* position: absolute; */
+}
+.menu_top_section {
+    display: flex;
+    /* padding: 1rem; */
+}
+.menu_top_section img {
+    width: 250px;
+    object-fit: contain;
+}
+.menu_top_text {
+    margin-left: 1rem;
+    padding: 0 1rem;
+}
+
+.menu_top_heading ul {
+    list-style: none;
+    color: white;
+}
+
+.menu_top_heading ul li {
+    padding: 0.5rem;
+}
+
+.menu_top_heading_rating {
+    margin-top: 1rem;
+    display: flex;
+}
+
+.menu_border {
+    border: 1px solid white;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
 }

@@ -3,6 +3,11 @@ import ReactDOM from "react-dom/client";
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import About from "./About";
+import Error from "./Error";
+import Contact from "./Contact";
+import RestroDetails from "./RestroDetails";
 const AppLayout = () => {
   return (
     /*
@@ -24,10 +29,36 @@ const AppLayout = () => {
         */
     <React.Fragment>
       <Header />
-      <Body />
+      <Outlet />
       <Footer />
     </React.Fragment>
   );
 };
+
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/help",
+        element: <Contact />,
+      },
+      {
+        path: "/restaurant/:id",
+        element: <RestroDetails />,
+      },
+    ],
+  },
+]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout />);
+root.render(<RouterProvider router={appRouter} />);

@@ -2,6 +2,7 @@ import { restaurantlist } from "./Config";
 import HotelCard from "./HotelCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 function filterData(searchInput, restaurants) {
   const filterdata = restaurants.filter((restro) =>
@@ -52,15 +53,19 @@ const Body = () => {
             </div>
           </div>
         </div>
-        {restaurants.length === 0 ? (
-          <Shimmer />
-        ) : (
-          <div className="items py-3">
-            {restaurants.map((hotel) => {
-              return <HotelCard key={hotel.data.id} {...hotel.data} />;
-            })}
-          </div>
-        )}
+        <div className="items py-3">
+          {restaurants.length === 0 ? (
+            <Shimmer />
+          ) : (
+            restaurants.map((hotel) => {
+              return (
+                <Link to={"/restaurant/" + hotel.data.id}>
+                  <HotelCard key={hotel.data.id} {...hotel.data} />
+                </Link>
+              );
+            })
+          )}
+        </div>
       </div>
     </div>
   );
